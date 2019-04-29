@@ -226,13 +226,13 @@ Desestructurémoslo y obtengamos lo que necesitamos.
 
 Aunque las propiedades `google` y `map` no existen en el el _scope_ de `TravelMap`, el componente tiene acceso a ellas y pueden ser usadas en el _template_.
 
-Puede estar pensando ¿porque haría cosas como esta? y ¿cuál es el uso de todo esto?
+Puede estar pensando ¿por qué haría cosas como esta? y ¿cuál es el uso de todo esto?
 
 Los _scoped slots_ nos permiten pasar un _template_ al _slot_ en vez de un elemento renderizado. Se le llama `scoped` _slot_ porque tendrá acceso a ciertos datos del componente hijo aunque este _template_ sea renderizado en el _scope_ del componente padre. Eso nos da la libertad de elegir el contenido del _template_ desde el componente padre.
 
 ### 5. Crear un componente factory para Marcadores y Líneas Poligonales
 
-Ahora que nuestro mapa está pronto, crearmos dos componentes _factory_ que usaramos para añadir elementos a `TravelMal`.
+Ahora que nuestro mapa está pronto, crearemos dos componentes _factory_ que usaremos para añadir elementos a `TravelMal`.
 
 `GoogleMapMarker.vue`
 
@@ -297,9 +297,9 @@ export default {
 }
 ```
 
-Ambos reciben la propiedad `google` que usamos para extraer el objeto deseado (Marcadores o Líneas Poligonales) así como `map`, la cuál da referencia al mapa en el que queremos poner nuestro elemento.
+Ambos reciben la propiedad `google` que usamos para extraer el objeto deseado (Marcadores o Líneas Poligonales) así como `map`, la cual da referencia al mapa en el que queremos poner nuestro elemento.
 
-Cada componente también acepta una _prop_ extra para crear el elemnto correspondiente. En este caso tenemos `marker` y `path` respectivamente.
+Cada componente también acepta una _prop_ extra para crear el elemento correspondiente. En este caso tenemos `marker` y `path`, respectivamente.
 
 En el método `mounted` del ciclo de vida, creamos un element (Marcador/Línea Polígonal) y lo añadimos a nuestro mapa pasando la propiedad `map` al constructor del objeto.
 
@@ -337,7 +337,7 @@ Integremos la información directamente en el _template_:
 </GoogleMapLoader>
 ```
 
-Necesitamos importar los componentes _factory_ en nuestro _script_ y luego preparar la información que luego le pasaremos a los marcadores y líneas:
+Necesitamos importar los componentes _factory_ en nuestro _script_ y preparar la información que luego le pasaremos a los marcadores y líneas:
 
 ```js
 import { mapSettings } from '@/constants/mapSettings'
@@ -378,12 +378,12 @@ export default {
 }
 ```
 
-## Cuando evitar este patrón
+## Cuándo evitar este patrón
 
-Puede parecer muy tentador crear una solución muy compleja basada en este ejemplo, pero en cierto punto podemos llegar a la situación en la que esta abstracción se convierte en una parte independiente de código viviendo en el proyecto. Si llegamos a tal punto, puede valer la pena considerar extraer está abstracción a un componente que no utilize _scoped slots_.
+Puede parecer muy tentador crear una solución muy compleja basada en este ejemplo, pero en cierto punto podemos llegar a la situación en la que esta abstracción se convierte en una parte independiente de código viviendo en el proyecto. Si llegamos a tal punto, puede valer la pena considerar extraer esta abstracción a un componente que no utilize _scoped slots_.
 
 ## Resumiendo
 
-Esto es todo. Ahora podemos reusar el componente `GoogleMapLoader` como base para todos nuestros mapa pasando diferentes template a cada uno de ellos. Imagine que necesita crear otro mapa con diferentes marcador o simplemente marcadores sin líneas poligonales. Usando este patrón se vuelve muy fácil, ya que sólo se requiere pasar un contenido diferente a el componente `GoogleMapLoader`.
+Esto es todo. Ahora podemos reusar el componente `GoogleMapLoader` como base para todos nuestros mapas, pasando diferentes templates a cada uno de ellos. Imagine que necesita crear otro mapa con diferentes marcadores o simplemente marcadores sin líneas poligonales. Usando este patrón resulta muy fácil, ya que sólo se requiere pasar un contenido diferente al componente `GoogleMapLoader`.
 
 Este patrón no está estrictamente conectado con Google Maps; puede ser utilizado en un componente base con cualquier librería para luego exponer la API de la misma, que luego puede ser utilizada por el componente que invoca dicho componente base.
